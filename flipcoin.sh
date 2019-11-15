@@ -3,7 +3,8 @@
 echo "welcome"
 echo -e "Entert= the no of time you want to flip coin : \c" 
 read number
-coins=2
+echo -e "how many coins :\c"
+coins=3
 declare -A dictionary
 H=0
 T=0
@@ -29,3 +30,4 @@ done
 
 coin
 echo "${!dictionary[@]} : ${dictionary[@]}"
+
