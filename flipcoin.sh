@@ -1,28 +1,31 @@
-#!/bin/bash
+#!/bin/bash -x
 
-echo -e "enter the times to toss coin \c"
-read num
-Head=0
-Tail=0
+echo "welcome"
+echo -e "Entert= the no of time you want to flip coin : \c" 
+read number
+coins=2
+declare -A dictionary
+H=0
+T=0
 
-for ((i=0; i<$num; i++))
+function coin() {
+for (( i=1; i<=$number; i++ ))
 do
-	random=$((RANDOM%2))
+str=""
+ for(( j=0; j<$coins; j++ ))
+ do
+   random=$(( RANDOM % 2 ))
 	if [ $random -eq 1 ]
 	then
-		 ((Head++))
+	   str=$str"H"
 	else
-		 ((Tail++))
+            str=$str"T"
 	fi
+  done
+echo coins : $str
+dictionary["$str"]=$(( ${dictionary["$str"]} + 1 ))
 done
+}
 
-declare -A Coins
-Coins[((Head))]=$Head
-Coins[((Tail))]=$Tail
-echo ${Coins[@]}
-
-h=$(($Head*100))
-headper=$(($h/$num))
-t=$(($Tail*100))
-tailper=$(($t/$num))
-echo "head % : $headper , tails % : $tailper "
+coin
+echo "${!dictionary[@]} : ${dictionary[@]}"
